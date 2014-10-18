@@ -3,7 +3,7 @@ import webkit, gtk
 from threading import Thread
 from multiprocessing.connection import Listener, Client
 
-class Reciver(Thread):
+class Receiver(Thread):
     def __init__(self, browser):
         self.browser = browser
         Thread.__init__(self)
@@ -40,14 +40,14 @@ class Browser(object):
         scroller.add(self.web)
         win.show_all()
 
-        self.reciver = Reciver(self)
+        self.receiver = Receiver(self)
 
     def stop(self, stuff=None):
         gtk.main_quit()
-        self.reciver.stop()
+        self.receiver.stop()
 
     def run(self):
-        self.reciver.start()
+        self.receiver.start()
         gtk.main()
 
     def refresh(self):
